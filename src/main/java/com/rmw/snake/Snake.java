@@ -46,6 +46,10 @@ public class Snake {
         direction = newDirection;
     }
 
+    Direction getDirection() {
+        return direction;
+    }
+
     void update() {
         if (dead) {
             return;
@@ -72,8 +76,8 @@ public class Snake {
             default:
                 newHead = null;
         }
-        // can be null if we hit the wall
-        if (newHead != null) {
+        // check that newHead isn't a wall nor part of the body
+        if (newHead != null && !occupiedTiles.contains(newHead)) {
             newHead.setColour(BLACK);
             headTile = newHead;
             occupiedTiles.add(headTile);

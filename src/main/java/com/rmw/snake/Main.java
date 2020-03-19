@@ -65,16 +65,24 @@ public class Main extends PApplet {
     public void keyPressed() {
         switch (keyCode) {
             case LEFT:
-                snake.changeDirection(Direction.LEFT);
+                if (snake.getDirection() != Direction.RIGHT) {
+                    snake.changeDirection(Direction.LEFT);
+                }
                 break;
             case RIGHT:
-                snake.changeDirection(Direction.RIGHT);
+                if (snake.getDirection() != Direction.LEFT) {
+                    snake.changeDirection(Direction.RIGHT);
+                }
                 break;
             case UP:
-                snake.changeDirection(Direction.UP);
+                if (snake.getDirection() != Direction.DOWN) {
+                    snake.changeDirection(Direction.UP);
+                }
                 break;
             case DOWN:
-                snake.changeDirection(Direction.DOWN);
+                if (snake.getDirection() != Direction.UP) {
+                    snake.changeDirection(Direction.DOWN);
+                }
                 break;
             default:
                 return;
