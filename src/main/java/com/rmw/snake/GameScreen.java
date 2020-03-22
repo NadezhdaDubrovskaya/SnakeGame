@@ -3,12 +3,12 @@ package com.rmw.snake;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.rmw.snake.Configuration.COLS;
-import static com.rmw.snake.Configuration.ROWS;
+import static com.rmw.snake.Configuration.*;
 
 class GameScreen {
-
     private final List<List<Tile>> tiles = new ArrayList<>(ROWS);
+
+    private boolean foodPresent;
 
     GameScreen() {
         init();
@@ -23,6 +23,22 @@ class GameScreen {
             }
             tiles.add(row);
         }
+    }
+
+    /**
+     * Generated food for a snake at a random position if there is no food left
+     */
+    void generateFood() {
+        if (!foodPresent) {
+            final int i = Utils.getRandomNumberInRange(0, ROWS - 1);
+            final int j = Utils.getRandomNumberInRange(0, COLS - 1);
+            getTileAtPosition(i, j).setFood();
+            foodPresent = true;
+        }
+    }
+
+    void reset() {
+        foodPresent = false;
     }
 
     Tile getTileAtPosition(final int i, final int j) {

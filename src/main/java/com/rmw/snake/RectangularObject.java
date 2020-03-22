@@ -2,7 +2,7 @@ package com.rmw.snake;
 
 import processing.core.PApplet;
 
-import static com.rmw.snake.Configuration.SCALE;
+import static com.rmw.snake.Configuration.*;
 
 class RectangularObject extends ScreenObject {
 
@@ -11,16 +11,20 @@ class RectangularObject extends ScreenObject {
 
     RectangularObject(final PApplet pApplet) {
         super(pApplet);
-        setColour(100, 150, 0);
     }
 
     RectangularObject(final PApplet pApplet, final Colour colour) {
         super(pApplet);
-        setColour(colour.v1, colour.v2, colour.v3);
+        setColour(colour);
     }
 
     @Override
     void show() {
+        // black colour means the snake is at that tile so even if it is a food tile
+        // it should not be coloured as such
+        if (!getColour().equals(BLACK) && getTile().isFood()) {
+            setColour(RED);
+        }
         getPApplet().fill(getColour().v1, getColour().v2, getColour().v3);
         getPApplet().stroke(0, 0, 0);
         getPApplet().rect(getVectorPosition().x, getVectorPosition().y, width, height);

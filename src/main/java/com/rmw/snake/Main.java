@@ -54,6 +54,7 @@ public class Main extends PApplet {
     @Override
     public void draw() {
         updatesPassed++;
+        gameScreen.generateFood();
         mapTiles.forEach(ScreenObject::update);
         if (updatesPassed >= updateHoldup) {
             snake.update();
@@ -85,7 +86,6 @@ public class Main extends PApplet {
                 }
                 break;
             default:
-                return;
         }
 
     }

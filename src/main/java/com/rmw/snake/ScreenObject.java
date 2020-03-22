@@ -43,10 +43,10 @@ abstract class ScreenObject {
         return colour;
     }
 
-    void setColour(final int v1, final int v2, final int v3) {
-        colour.v1 = v1;
-        colour.v2 = v2;
-        colour.v3 = v3;
+    void setColour(final Colour colour) {
+        this.colour.v1 = colour.v1;
+        this.colour.v2 = colour.v2;
+        this.colour.v3 = colour.v3;
     }
 
     void reset() {

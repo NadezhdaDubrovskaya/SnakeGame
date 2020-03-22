@@ -22,6 +22,12 @@ public class Snake {
      */
     private LinkedList<Tile> body = new LinkedList<>();
 
+    /**
+     * Is used to count how many bodies are still left to be added
+     * Happens after snake eats the food
+     */
+    private int bodiesToAdd = 0;
+
     Snake(final GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
@@ -55,10 +61,6 @@ public class Snake {
             return;
         }
 
-        tailTile.setColour(MEDIUM_GRAY);
-        occupiedTiles.remove(tailTile);
-        body.removeLast();
-        tailTile = body.getLast(); //assign new tail tile
         final Tile newHead;
         switch (direction) {
             case UP:
@@ -76,16 +78,41 @@ public class Snake {
             default:
                 newHead = null;
         }
+
+        handleTail();
+
         // check that newHead isn't a wall nor part of the body
         if (newHead != null && !occupiedTiles.contains(newHead)) {
+
             newHead.setColour(BLACK);
             headTile = newHead;
             occupiedTiles.add(headTile);
             body.addFirst(headTile);
+
+            if (newHead.isFood()) {
+                bodiesToAdd += LENGTH_INCREASE_RATE;
+                // It is important to reset food after the snake "ate" it
+                gameScreen.reset();
+                newHead.reset();
+            }
         } else {
             dead = true;
         }
     }
 
+    /**
+     * Depending on whether there the snake ate a food recently or not the tail can
+     * stay where it is right now or move
+     */
+    private void handleTail() {
+        if (bodiesToAdd > 0) {
+            bodiesToAdd--;
+        } else {
+            tailTile.setColour(MEDIUM_GRAY);
+            occupiedTiles.remove(tailTile);
+            body.removeLast();
+            tailTile = body.getLast(); //assign new tail tile
+        }
+    }
 
 }

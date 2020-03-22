@@ -37,7 +37,7 @@ class Tile {
 
     void setColour(final Colour colour) {
         if (rectangularObject != null) {
-            rectangularObject.setColour(colour.v1, colour.v2, colour.v3);
+            rectangularObject.setColour(colour);
         }
     }
 

@@ -23,6 +23,11 @@ class Configuration {
     static final int STARTING_SNAKE_POSITION_ROW = 20;
     static final Direction STARTING_DIRECTION = Direction.UP;
 
+    /**
+     * How much the snake grows after it eats a food
+     */
+    static final int LENGTH_INCREASE_RATE = 3;
+
     // Colors
     static final Colour BLACK = new Colour(0, 0, 0);
     static final Colour WHITE = new Colour(255, 255, 255);

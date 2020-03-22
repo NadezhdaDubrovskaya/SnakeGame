@@ -1,5 +1,7 @@
 package com.rmw.snake;
 
+import java.util.Objects;
+
 /**
  * Represents RGB colour that is used by Processing
  */
@@ -25,5 +27,20 @@ class Colour {
         v1 = colour.v1;
         v2 = colour.v2;
         v3 = colour.v3;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Colour colour = (Colour) o;
+        return v1 == colour.v1 &&
+                v2 == colour.v2 &&
+                v3 == colour.v3;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(v1, v2, v3);
     }
 }
